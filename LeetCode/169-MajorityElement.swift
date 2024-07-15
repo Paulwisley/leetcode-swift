@@ -6,55 +6,45 @@
 //
 
 /*
- Given an integer array nums, rotate the array to the right by k steps, where k is non-negative.
+
+ Given an array nums of size n, return the majority element.
+
+ The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
 
   
 
  Example 1:
 
- Input: nums = [1,2,3,4,5,6,7], k = 3
- Output: [5,6,7,1,2,3,4]
- Explanation:
- rotate 1 steps to the right: [7,1,2,3,4,5,6]
- rotate 2 steps to the right: [6,7,1,2,3,4,5]
- rotate 3 steps to the right: [5,6,7,1,2,3,4]
+ Input: nums = [3,2,3]
+ Output: 3
  Example 2:
 
- Input: nums = [-1,-100,3,99], k = 2
- Output: [3,99,-1,-100]
- Explanation:
- rotate 1 steps to the right: [99,-1,-100,3]
- rotate 2 steps to the right: [3,99,-1,-100]
-
+ Input: nums = [2,2,1,1,1,2,2]
+ Output: 2
+ 
  */
 
 import Foundation
 import XCTest
 
 private class Solution {
-    func rotate(_ nums: inout [Int], _ k: Int) {
-        let len = nums.count, origin_nums = nums
-        for idx in 0..<len {
-            let newIdx = (idx + k) % len
-            nums[newIdx] = origin_nums[idx]
-        }
-    }
-    
-    func rotate2(_ nums: inout [Int], _ k :Int) {
-        guard nums.count > 1 else {return}
-        let ramainer = k % nums.count
-        let k = ramainer > 0 ? ramainer : k
-        nums = nums.suffix(k) + nums.prefix(nums.count - k)
-    }
-}
+    func majorityElement(_ nums: [Int]) -> Int {
+        var element = nums[0]
+        var count = 0
 
-class TsetRotateArray:XCTestCase {
-    func test_case1() {
-        var nums1 = [1,2,3,4,5,6]
-        Solution().rotate(&nums1, 3)
-        print(nums1)
-        XCTAssertEqual(nums1, [4,5,6,1,2,3])
+        for indx in 0..<nums.count {
+            if count == 0 {
+                element = nums[indx]
+                count = 1
+            }else{
+                if element == nums[indx]{
+                    count += 1
+                }else{
+                    count -= 1
+                }
+            }
+        }
+        return element
     }
-    
 }
 

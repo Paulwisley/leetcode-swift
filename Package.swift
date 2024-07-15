@@ -17,7 +17,7 @@ let package = Package(
         .target(
             name: "CSAlgorithm",
             dependencies: [],
-            path: "DataStructure"
+            path: "Sources"
         ),
         .testTarget(
             name: "CSAlgorithmTests",
